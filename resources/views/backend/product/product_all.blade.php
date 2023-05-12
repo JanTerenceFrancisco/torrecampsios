@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Customers</h4>
+                        <h4 class="mb-sm-0">Products</h4>
 
 
 
@@ -21,10 +21,10 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a href="{{ route('customer.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;">Add Customer</a> <br>
+                            <a href="{{ route('supplier.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
+                                style="float:right;">Add Product</a> <br>
 
-                            <h4 class="card-title">Customer Data</h4>
+                            <h4 class="card-title">Products Data </h4>
 
 
                             <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"
@@ -32,32 +32,30 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Customer Name</th>
-                                        <th>Customer Image</th>
-                                        <th>Mobile No.</th>
-                                        <th>Email</th>
+                                        <th>Category</th>
+                                        <th>Supplier Name</th>
+                                        <th>Product Name</th>
+                                        <th>Unit</th>
                                         <th>Action</th>
 
                                 </thead>
 
                                 <tbody>
 
-                                    @foreach ($customers as $key => $item)
+                                    @foreach ($products as $key => $item)
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
-                                            <td> {{ $item->customer_name }} </td>
+                                            <td> {{ $item->category_id }} </td>
+                                            <td> {{ $item->supplier_id }} </td>
+                                            <td> {{ $item->product_name }} </td>
+                                            <td> {{ $item->unit_id }} </td>
+
                                             <td>
-                                                <img style="width:60px;height:50px;" src="{{ asset($item->customer_image) }}" alt="">
-                                            </td>
-                                            <td> {{ $item->customer_phone }} </td>
-                                            <td> {{ $item->customer_email }} </td>
-                                            <td>
-                                                <a href="{{ route('customer.edit', $item->id) }}" class="btn btn-info sm"
+                                                <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-info sm"
                                                     title="Edit Data"> <i class="fas fa-edit"></i> </a>
 
-                                                <a href="{{ route('customer.delete', $item->id) }}"
-                                                    class="btn btn-danger sm" title="Delete Data" id="delete"> <i
-                                                        class="fas fa-trash-alt"></i> </a>
+                                                <a href="{{ route('supplier.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
+                                                    id="delete"> <i class="fas fa-trash-alt"></i> </a>
 
                                             </td>
 
