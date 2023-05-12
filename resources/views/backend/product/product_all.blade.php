@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a href="{{ route('supplier.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
+                            <a href="{{ route('product.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
                                 style="float:right;">Add Product</a> <br>
 
                             <h4 class="card-title">Products Data </h4>
@@ -36,6 +36,7 @@
                                         <th>Supplier Name</th>
                                         <th>Product Name</th>
                                         <th>Unit</th>
+                                        <th>Product Image</th>
                                         <th>Action</th>
 
                                 </thead>
@@ -45,16 +46,18 @@
                                     @foreach ($products as $key => $item)
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
-                                            <td> {{ $item->category_id }} </td>
-                                            <td> {{ $item->supplier_id }} </td>
+                                            <td> {{ $item['category']['category_name'] }} </td>
+                                            <td> {{ $item['supplier']['supplier_name'] }} </td>
                                             <td> {{ $item->product_name }} </td>
-                                            <td> {{ $item->unit_id }} </td>
-
+                                            <td> {{ $item['unit']['unit_name'] }} </td>
                                             <td>
-                                                <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-info sm"
+                                                <img style="width:60px;height:50px;" src="{{ asset($item->product_image) }}" alt="">
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('product.edit', $item->id) }}" class="btn btn-info sm"
                                                     title="Edit Data"> <i class="fas fa-edit"></i> </a>
 
-                                                <a href="{{ route('supplier.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
+                                                <a href="{{ route('product.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
                                                     id="delete"> <i class="fas fa-trash-alt"></i> </a>
 
                                             </td>
