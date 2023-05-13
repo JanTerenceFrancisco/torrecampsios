@@ -74,6 +74,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('purchase.all') }}">All Purchase Orders</a></li>
+                        <li><a href="{{ route('purchase.pending') }}">Pending Purchase Orders</a></li>
                     </ul>
                 </li>
 
