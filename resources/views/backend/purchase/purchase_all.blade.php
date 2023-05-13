@@ -31,7 +31,6 @@
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>Sl</th>
                                         <th>Purchase No.</th>
                                         <th>Date</th>
                                         <th>Supplier</th>
@@ -46,13 +45,12 @@
 
                                     @foreach ($allData as $key => $item)
                                         <tr class="text-center">
-                                            <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->purchase_no }} </td>
-                                            <td> {{ $item->date }} </td>
-                                            <td> {{ $item->supplier_id }} </td>
-                                            <td> {{ $item->category_id }} </td>
+                                            <td> {{ date('m/d/Y', strtotime($item->date)) }} </td>
+                                            <td> {{ $item['supplier']['supplier_name'] }} </td>
+                                            <td> {{ $item['category']['category_name'] }} </td>
                                             <td> {{ $item->buying_qty }} </td>
-                                            <td> {{ $item->product_id }} </td>
+                                            <td> {{ $item['product']['product_name'] }} </td>
                                             <td><span class="btn btn-warning">Pending</span></td>
                                             <td>
                                                 <a href="{{ route('product.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"

@@ -17,7 +17,7 @@
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Date</label>
                                         <input class="form-control example-date-input" name="date" type="date"
-                                            id="">
+                                            id="date">
                                     </div>
                                 </div>
                                 <!-- end col -->
@@ -89,7 +89,7 @@
                         <!-- end card-body -->
 
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('purchase.store') }}" method="POST">
                                 @csrf
 
                                 <table class="table-sm table-bordered table-striped" width="100%"
