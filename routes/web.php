@@ -103,7 +103,7 @@ Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve'
  //Invoice All Route
 Route::controller(InvoiceController::class)->group(function(){
 Route::get('/invoice/all', 'InvoiceAll')->name('invoice.all');
-// Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+Route::get('/invoice/add', 'InvoiceAdd')->name('invoice.add');
 // Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
 // Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
 // Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');

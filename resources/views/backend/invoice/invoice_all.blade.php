@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a href="{{ route('purchase.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
+                            <a href="{{ route('invoice.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
                                 style="float:right;"><i class="fas fa-plus-circle"> Add Invoice</a></i> <br>
 
                             <h4 class="card-title">Invoices Data</h4>
