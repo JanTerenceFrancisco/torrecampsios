@@ -19,10 +19,18 @@ class InvoiceController extends Controller
 
     public function InvoiceAdd()
     {
-        $supplier = Supplier::all();
-        $unit = Unit::all();
         $category = Category::all();
+        $invoice_data = Invoice::orderBy('id', 'DESC')->first();
 
-        return view('backend.invoice.invoice_add', compact('supplier', 'unit', 'category'));
+        if ($invoice_data == null) {
+            $firstReg = 0;
+            $invoice_no = $firstReg + 1;
+        } else {
+            $invoice_data = Invoice::orderBy('id', 'DESC')->first()->invoice_no;
+            $invoice_no = $invoice_data + 1;
+        }
+        $date = date('Y-m-d');
+
+        return view('backend.invoice.invoice_add', compact('category', 'invoice_no', 'date'));
     }
 }
