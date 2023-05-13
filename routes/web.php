@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Pos\CategoryController;
 use App\Http\Controllers\Pos\CustomerController;
 use App\Http\Controllers\Pos\DefaultController;
+use App\Http\Controllers\Pos\InvoiceController;
 use App\Http\Controllers\Pos\ProductController;
 use App\Http\Controllers\Pos\PurchaseController;
 use App\Http\Controllers\Pos\SupplierController;
@@ -97,6 +98,16 @@ Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
 Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
 Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
 Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
+});
+
+ //Invoice All Route
+Route::controller(InvoiceController::class)->group(function(){
+Route::get('/invoice/all', 'InvoiceAll')->name('invoice.all');
+// Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+// Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+// Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+// Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+// Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
 });
 
 //Default All Route
