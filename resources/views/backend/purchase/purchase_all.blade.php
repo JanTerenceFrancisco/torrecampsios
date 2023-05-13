@@ -22,7 +22,7 @@
                         <div class="card-body">
 
                             <a href="{{ route('purchase.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;">Add Purchase Order</a> <br>
+                                style="float:right;"><i class="fas fa-plus-circle"> Add Purchase Order</a></i> <br>
 
                             <h4 class="card-title">Purchase Orders Data</h4>
 

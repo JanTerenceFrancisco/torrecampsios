@@ -22,7 +22,7 @@
                         <div class="card-body">
 
                             <a href="{{ route('unit.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;">Add Unit</a> <br>
+                                style="float:right;"><i class="fas fa-plus-circle"> Add Unit</a></i> <br>
 
                             <h4 class="card-title">Units Data </h4>
 
