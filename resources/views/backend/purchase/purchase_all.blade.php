@@ -53,7 +53,7 @@
                                             <td> {{ $item['product']['product_name'] }} </td>
                                             <td><span class="btn btn-warning">Pending</span></td>
                                             <td>
-                                                <a href="{{ route('product.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
+                                                <a href="{{ route('purchase.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
                                                     id="delete"> <i class="fas fa-trash-alt"></i> </a>
                                             </td>
                                         </tr>

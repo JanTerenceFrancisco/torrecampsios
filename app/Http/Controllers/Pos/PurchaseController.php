@@ -65,4 +65,16 @@ class PurchaseController extends Controller
             }
         }
     }
+
+    public function PurchaseDelete($id)
+    {
+        Purchase::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Purchase Order Deleted',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->route('purchase.all')->with($notification);
+    }
 }
