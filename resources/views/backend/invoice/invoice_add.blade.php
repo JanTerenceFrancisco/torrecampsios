@@ -88,7 +88,7 @@
                         <!-- end card-body -->
 
                         <div class="card-body">
-                            <form action="{{ route('purchase.store') }}" method="POST">
+                            <form action="{{ route('invoice.store') }}" method="POST">
                                 @csrf
 
                                 <table class="table-sm table-bordered table-striped" width="100%"

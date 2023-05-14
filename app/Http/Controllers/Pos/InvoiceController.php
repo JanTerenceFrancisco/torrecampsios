@@ -35,4 +35,25 @@ class InvoiceController extends Controller
 
         return view('backend.invoice.invoice_add', compact('category','customer', 'invoice_no', 'date'));
     }
+
+    public function InvoiceStore(Request $request)
+    {
+        if ($request->category_id == null) {
+            $notification = array(
+                'message' => 'Please Select an Item',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+            if ($request->paid_amount > $request->estimated_amount) {
+                $notification = array(
+                    'message' => 'Paid Amount is over the Total Amount',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            } else {
+                
+            }
+        }
+    }
 }
