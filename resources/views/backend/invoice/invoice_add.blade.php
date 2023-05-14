@@ -137,6 +137,19 @@
                                     </div>
                                 </div> <br>
 
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label for="">Paid Status</label>
+                                        <select name="paid_status" id="paid_status" class="form-select">
+                                            <option value="" disabled>Select Status</option>
+                                            <option value="full_paid">Full Paid</option>
+                                            <option value="full_due">Full Due</option>
+                                            <option value="partial_paid">Partial Paid</option>
+                                        </select> <br>
+                                        <input type="text" name="paid_amount" class="paid_amount form-control" placeholder="Enter Paid Amount" style="display: none;">
+                                    </div>
+                                </div> <br>
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-info" id="storeButton">Add Invoice</button>
                                 </div>
@@ -308,4 +321,18 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+    
+    $(document).on('change', '#paid_status', function(){
+        var paid_status = $(this).val();
+        if(paid_status == 'partial_paid'){
+            $('.paid_amount').show();
+        } else {
+            $('.paid_amount').hide();
+        }
+    });
+    
+    </script>
+
 @endsection
