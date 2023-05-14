@@ -94,14 +94,13 @@
                                     style="border-color: #ddd;">
 
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Category</th>
                                             <th>Product Name</th>
-                                            <th>Unit</th>
-                                            <th>Unit Price</th>
-                                            <th>Description</th>
-                                            <th>Total Price</th>
-                                            <th>Action</th>
+                                            <th width="7%">QTY</th>
+                                            <th width="10%">Unit Price</th>
+                                            <th width="15%">Total Price</th>
+                                            <th width="7%">Action</th>
                                         </tr>
                                     </thead>
 
@@ -111,7 +110,7 @@
 
                                     <tbody>
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="4">Total Amount</td>
                                             <td>
                                                 <input type="text" class="form-control estimated_amount" readonly
                                                     name="estimated_amount" value="0" id="estimated_amount"
@@ -123,8 +122,14 @@
 
                                 </table> <br>
 
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <textarea name="description" id="description" class="form-control" placeholder="Description" rows="3"></textarea>
+                                    </div>
+                                </div> <br>
+
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info" id="storeButton">Add Purchase</button>
+                                    <button type="submit" class="btn btn-info" id="storeButton">Add Invoice</button>
                                 </div>
 
                             </form>
@@ -144,9 +149,8 @@
     
         <tr class="delete_add_more_item" id="delete_add_more_item">
 
-            <input type="hidden" name="date[]" value="@{{ date }}">
-            <input type="hidden" name="purchase_no[]" value="@{{ purchase_no }}">
-            <input type="hidden" name="supplier_id[]" value="@{{ supplier_id }}">
+            <input type="hidden" name="date" value="@{{ date }}">
+            <input type="hidden" name="invoice_no" value="@{{ invoice_no }}">
     
             <td>
                 <input type="hidden" name="category_id[]" value="@{{ category_id }}">
@@ -157,16 +161,13 @@
                 @{{ product_name }}
             </td>
             <td>
-                <input type="number" min="1" class="form-control buying_qty text-right" name="buying_qty[]">
+                <input type="number" min="1" class="form-control selling_qty text-right" name="selling_qty[]">
             </td>
             <td>
                 <input type="text"  class="form-control unit_price text-right" name="unit_price[]">
             </td>
             <td>
-                <input type="text" class="form-control" name="description[]">
-            </td>
-            <td>
-                <input type="text" class="form-control buying_price text-right" name="buying_price[]" value="0" readonly>
+                <input type="text" class="form-control selling_price text-right" name="selling_price[]" value="0" readonly>
             </td>
             <td>
                 <i class="btn btn-danger btn-sm fas fa-window-close removeeventmore"></i>
@@ -180,8 +181,7 @@
         $(document).ready(function() {
             $(document).on("click", ".addeventmore", function() {
                 var date = $('#date').val();
-                var purchase_no = $('#purchase_no').val();
-                var supplier_id = $('#supplier_id').val();
+                var invoice_no = $('#invoice_no').val();
                 var category_id = $('#category_id').val();
                 var category_name = $('#category_id').find('option:selected').text();
                 var product_id = $('#product_id').val();
@@ -189,20 +189,6 @@
 
                 if (date == '') {
                     $.notify("Date is required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (purchase_no == '') {
-                    $.notify("Purchase Number is required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (supplier_id == '') {
-                    $.notify("Supplier is required", {
                         globalPosition: 'top right',
                         className: 'error'
                     });
@@ -227,8 +213,6 @@
                 var template = Handlebars.compile(source);
                 var data = {
                     date: date,
-                    purchase_no: purchase_no,
-                    supplier_id: supplier_id,
                     category_id: category_id,
                     category_name: category_name,
                     product_id: product_id,
@@ -243,11 +227,11 @@
                 totalAmountPrice();
             });
 
-            $(document).on('keyup click', '.unit_price,.buying_qty', function() {
+            $(document).on('keyup click', '.unit_price,.selling_qty', function() {
                 var unit_price = $(this).closest("tr").find("input.unit_price").val();
-                var qty = $(this).closest("tr").find("input.buying_qty").val();
+                var qty = $(this).closest("tr").find("input.selling_qty").val();
                 var total = unit_price * qty;
-                $(this).closest("tr").find("input.buying_price").val(total);
+                $(this).closest("tr").find("input.selling_price").val(total);
                 totalAmountPrice();
             });
 
@@ -255,7 +239,7 @@
 
             function totalAmountPrice() {
                 var sum = 0;
-                $(".buying_price").each(function() {
+                $(".selling_price").each(function() {
                     var value = $(this).val();
                     if (!isNaN(value) && value.length != 0) {
                         sum += parseFloat(value);
