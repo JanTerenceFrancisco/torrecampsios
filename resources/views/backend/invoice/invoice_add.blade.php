@@ -17,8 +17,9 @@
                                 <div class="col-md-1">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Invoice No.</label>
-                                        <input class="form-control example-date-input text-center" value="{{ $invoice_no }}" name="invoice_no" type="text"
-                                            id="invoice_no" readonly style="background-color:#ddd;">
+                                        <input class="form-control example-date-input text-center"
+                                            value="{{ $invoice_no }}" name="invoice_no" type="text" id="invoice_no"
+                                            readonly style="background-color:#ddd;">
                                     </div>
                                 </div>
                                 <!-- end col -->
@@ -26,8 +27,8 @@
                                 <div class="col-md-2">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Date</label>
-                                        <input class="form-control example-date-input" value="{{ $date }}" name="date" type="date"
-                                            id="date">
+                                        <input class="form-control example-date-input" value="{{ $date }}"
+                                            name="date" type="date" id="date">
                                     </div>
                                 </div>
                                 <!-- end col -->
@@ -138,6 +139,7 @@
                                 </div> <br>
 
                                 <div class="row">
+
                                     <div class="form-group col-md-3">
                                         <label for="">Paid Status</label>
                                         <select name="paid_status" id="paid_status" class="form-select">
@@ -146,10 +148,62 @@
                                             <option value="full_due">Full Due</option>
                                             <option value="partial_paid">Partial Paid</option>
                                         </select> <br>
-                                        <input type="text" name="paid_amount" class="paid_amount form-control" placeholder="Enter Paid Amount" style="display: none;">
+                                        <input type="text" name="paid_amount" class="paid_amount form-control"
+                                            placeholder="Enter Paid Amount" style="display: none;">
                                     </div>
-                                </div> <br>
 
+                                    <div class="form-group col-md-9">
+                                        <label for="">Customer Name</label>
+                                        <select name="customer_id" id="customer_id" class="form-select customer_id">
+                                            <option value="" disabled>Select Customer</option>
+                                            @foreach ($customer as $item)
+                                                <option value="{{ $item->id }}">{{ $item->customer_name }} -
+                                                    {{ $item->customer_phone }}</option>
+                                            @endforeach
+                                            <option value="0">New Customer</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                {{-- Hide Customer Form --}}
+                                <br> <div class="row new_customer" style="display: none">
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="customer_name" id="customer_name"
+                                            class="form-control" placeholder="Customer Name">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="customer_phone" id="customer_phone"
+                                            class="form-control" placeholder="Customer Phone No.">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="email" name="customer_email" id="customer_email"
+                                            class="form-control" placeholder="Customer Email">
+                                    </div>
+                                    <div class="form-group col-md-4 mt-2">
+                                        <input type="text" name="customer_address1" id="customer_address1"
+                                            class="form-control" placeholder="Address1">
+                                    </div>
+                                    <div class="form-group col-md-4 mt-2">
+                                        <input type="text" name="customer_address2" id="customer_address2"
+                                            class="form-control" placeholder="Address2">
+                                    </div>
+                                    <div class="form-group col-md-4 mt-2">
+                                        <input type="text" name="customer_city" id="customer_city"
+                                            class="form-control" placeholder="City">
+                                    </div>
+                                    <div class="form-group col-md-4 mt-2">
+                                        <input type="text" name="customer_province" id="customer_province"
+                                            class="form-control" placeholder="Province">
+                                    </div>
+                                    <div class="form-group col-md-4 mt-2">
+                                        <input type="text" name="customer_zipcode" id="customer_zipcode"
+                                            class="form-control" placeholder="Postal Code">
+                                    </div>
+                                </div>
+                                {{-- End Hide Customer Form --}}
+
+                                <br>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-info" id="storeButton">Add Invoice</button>
                                 </div>
@@ -257,7 +311,7 @@
                 $('#discount_amount').trigger('keyup');
             });
 
-            $(document).on('keyup', '#discount_amount', function(){
+            $(document).on('keyup', '#discount_amount', function() {
                 totalAmountPrice();
             });
 
@@ -274,8 +328,8 @@
 
                 var discount_amount = parseFloat($('#discount_amount').val());
                 if (!isNaN(discount_amount) && discount_amount.length != 0) {
-                        sum -= parseFloat(discount_amount);
-                    }
+                    sum -= parseFloat(discount_amount);
+                }
 
                 $('#estimated_amount').val(sum);
             }
@@ -313,7 +367,9 @@
                 $.ajax({
                     url: "{{ route('check-product-stock') }}",
                     type: "GET",
-                    data: {product_id: product_id},
+                    data: {
+                        product_id: product_id
+                    },
                     success: function(data) {
                         $('#current_stock_qty').val(data);
                     }
@@ -323,16 +379,24 @@
     </script>
 
     <script type="text/javascript">
-    
-    $(document).on('change', '#paid_status', function(){
-        var paid_status = $(this).val();
-        if(paid_status == 'partial_paid'){
-            $('.paid_amount').show();
-        } else {
-            $('.paid_amount').hide();
-        }
-    });
-    
+        $(document).on('change', '#paid_status', function() {
+            var paid_status = $(this).val();
+            if (paid_status == 'partial_paid') {
+                $('.paid_amount').show();
+            } else {
+                $('.paid_amount').hide();
+            }
+        });
     </script>
 
+    <script type="text/javascript">
+        $(document).on('change', '#customer_id', function() {
+            var customer_id = $(this).val();
+            if (customer_id == '0') {
+                $('.new_customer').show();
+            } else {
+                $('.new_customer').hide();
+            }
+        });
+    </script>
 @endsection
