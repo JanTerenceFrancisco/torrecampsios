@@ -109,6 +109,15 @@
                                     </tbody>
 
                                     <tbody>
+
+                                        <tr>
+                                            <td colspan="4">Discount</td>
+                                            <td>
+                                                <input type="text" class="form-control estimated_amount"
+                                                    name="discount_amount" placeholder="Discount" id="discount_amount">
+                                            </td>
+                                        </tr>
+
                                         <tr>
                                             <td colspan="4">Total Amount</td>
                                             <td>
@@ -124,7 +133,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <textarea name="description" id="description" class="form-control" placeholder="Description" rows="3"></textarea>
+                                        <textarea name="description" id="description" class="form-control" placeholder="Description" rows="2"></textarea>
                                     </div>
                                 </div> <br>
 
@@ -232,6 +241,10 @@
                 var qty = $(this).closest("tr").find("input.selling_qty").val();
                 var total = unit_price * qty;
                 $(this).closest("tr").find("input.selling_price").val(total);
+                $('#discount_amount').trigger('keyup');
+            });
+
+            $(document).on('keyup', '#discount_amount', function(){
                 totalAmountPrice();
             });
 
@@ -245,6 +258,12 @@
                         sum += parseFloat(value);
                     }
                 });
+
+                var discount_amount = parseFloat($('#discount_amount').val());
+                if (!isNaN(discount_amount) && discount_amount.length != 0) {
+                        sum -= parseFloat(discount_amount);
+                    }
+
                 $('#estimated_amount').val(sum);
             }
 
