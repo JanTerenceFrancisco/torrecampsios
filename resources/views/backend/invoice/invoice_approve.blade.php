@@ -65,7 +65,7 @@
 
                                         </td>
                                         <td colspan="3">
-                                            <p>Description: 
+                                            <p>Description:
                                                 <strong>{{ $invoice->description }}</strong>
                                             </p>
                                         </td>
@@ -73,9 +73,9 @@
                                 </tbody>
                             </table>
 
-                            <form method="POST" action="">
+                            <form method="POST" action="{{ route('approval.store', $invoice->id) }}">
                                 @csrf
-                                
+
                                 <table class="table table-dark" border="1" width="100%">
 
                                     <thead>
@@ -95,18 +95,26 @@
                                             $total_price = '0';
                                         @endphp
                                         @foreach ($invoice['invoice_details'] as $key => $item)
-                                        <tr class="text-center">
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item['category']['category_name'] }}</td>
-                                            <td>{{ $item['product']['product_name'] }}</td>
-                                            <td style="background-color: #8b008b">{{ $item['product']['quantity'] }}</td>
-                                            <td>{{ $item->selling_qty }}</td>
-                                            <td>{{ $item->unit_price }}</td>
-                                            <td>{{ $item->selling_price }}</td>
-                                        </tr>
-                                        @php
-                                            $total_price += $item->selling_price;
-                                        @endphp
+                                            <tr class="text-center">
+
+                                                <input type="hidden" name="category_id[]"
+                                                    value="{{ $item->category_id }}">
+                                                <input type="hidden" name="product_id[]" value="{{ $item->product_id }}">
+                                                <input type="hidden" name="selling_qty[{{ $item->id }}]"
+                                                    value="{{ $item->selling_qty }}">
+
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $item['category']['category_name'] }}</td>
+                                                <td>{{ $item['product']['product_name'] }}</td>
+                                                <td style="background-color: #8b008b">{{ $item['product']['quantity'] }}
+                                                </td>
+                                                <td>{{ $item->selling_qty }}</td>
+                                                <td>{{ $item->unit_price }}</td>
+                                                <td>{{ $item->selling_price }}</td>
+                                            </tr>
+                                            @php
+                                                $total_price += $item->selling_price;
+                                            @endphp
                                         @endforeach
                                         <tr>
                                             <td colspan="6">Sub Total</td>
