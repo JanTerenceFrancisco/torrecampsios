@@ -107,8 +107,7 @@ Route::get('/invoice/add', 'InvoiceAdd')->name('invoice.add');
 Route::post('/invoice/store', 'InvoiceStore')->name('invoice.store');
 Route::get('/invoice/pending/list', 'PendingList')->name('invoice.pending.list');
 Route::get('/invoice/delete/{id}', 'InvoiceDelete')->name('invoice.delete');
-// Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
-// Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
+Route::get('/invoice/approve/{id}', 'InvoiceApprove')->name('invoice.approve');
 });
 
 //Default All Route

@@ -164,4 +164,10 @@ class InvoiceController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
+    public function InvoiceApprove($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('backend.invoice.invoice_approve', compact('invoice'));
+    }
 }
