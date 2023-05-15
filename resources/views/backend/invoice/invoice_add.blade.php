@@ -289,6 +289,7 @@
                 var template = Handlebars.compile(source);
                 var data = {
                     date: date,
+                    invoice_no: invoice_no,
                     category_id: category_id,
                     category_name: category_name,
                     product_id: product_id,

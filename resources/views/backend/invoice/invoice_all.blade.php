@@ -44,7 +44,7 @@
                                     @foreach ($allData as $key => $item)
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
-                                            <td> </td>
+                                            <td>  </td>
                                             <td> {{ $item->invoice_no }} </td>
                                             <td> {{ date('m/d/Y', strtotime($item->date)) }} </td>
                                             <td> {{ $item->description }} </td>
