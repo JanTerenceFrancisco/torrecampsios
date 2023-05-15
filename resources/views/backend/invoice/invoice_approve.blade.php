@@ -73,7 +73,39 @@
                                 </tbody>
                             </table>
 
+                            <form action="">
 
+                                <table class="table table-dark" border="1" width="100%">
+
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Sl</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Product Name</th>
+                                            <th class="text-center">Current Stock</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Unit Price</th>
+                                            <th class="text-center">Total Price</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach ($invoice['invoice_details'] as $key => $item)
+                                        <tr class="text-center">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item['category']['category_name'] }}</td>
+                                            <td>{{ $item['product']['product_name'] }}</td>
+                                            <td>{{ $item['product']['quantity'] }}</td>
+                                            <td>{{ $item->selling_qty }}</td>
+                                            <td>{{ $item->unit_price }}</td>
+                                            <td>{{ $item->selling_price }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+
+                                </table>
+
+                            </form>
 
                         </div>
                     </div>
