@@ -208,4 +208,10 @@ class InvoiceController extends Controller
         );
         return redirect()->route('invoice.pending.list')->with($notification);
     }
+
+    public function PrintInvoiceList()
+    {
+        $allData = Invoice::orderBy('date', 'DESC')->orderBy('id', 'DESC')->where('status', '1')->get();
+        return view('backend.invoice.print_invoice_list', compact('allData'));
+    }
 }

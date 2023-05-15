@@ -74,9 +74,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('purchase.all') }}">All Purchase Orders</a></li>
-                        <li><a href="{{ route('purchase.pending') }}">Pending Purchase Orders</a></li>
+                        <li><a href="{{ route('purchase.pending') }}">Pending Purchase Orders</a></li> <hr>
                         <li><a href="{{ route('invoice.all') }}">All Invoice</a></li>
                         <li><a href="{{ route('invoice.pending.list') }}">Pending Invoices</a></li>
+                        <li><a href="{{ route('print.invoice.list') }}">Print Invoices</a></li>
                     </ul>
                 </li>
 
