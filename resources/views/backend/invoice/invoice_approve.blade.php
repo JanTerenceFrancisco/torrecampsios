@@ -73,8 +73,9 @@
                                 </tbody>
                             </table>
 
-                            <form action="">
-
+                            <form method="POST" action="">
+                                @csrf
+                                
                                 <table class="table table-dark" border="1" width="100%">
 
                                     <thead>
@@ -82,7 +83,7 @@
                                             <th class="text-center">Sl</th>
                                             <th class="text-center">Category</th>
                                             <th class="text-center">Product Name</th>
-                                            <th class="text-center">Current Stock</th>
+                                            <th class="text-center" style="background-color: #8b008b">Current Stock</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Unit Price</th>
                                             <th class="text-center">Total Price</th>
@@ -90,20 +91,48 @@
                                     </thead>
 
                                     <tbody>
+                                        @php
+                                            $total_price = '0';
+                                        @endphp
                                         @foreach ($invoice['invoice_details'] as $key => $item)
                                         <tr class="text-center">
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item['category']['category_name'] }}</td>
                                             <td>{{ $item['product']['product_name'] }}</td>
-                                            <td>{{ $item['product']['quantity'] }}</td>
+                                            <td style="background-color: #8b008b">{{ $item['product']['quantity'] }}</td>
                                             <td>{{ $item->selling_qty }}</td>
                                             <td>{{ $item->unit_price }}</td>
                                             <td>{{ $item->selling_price }}</td>
                                         </tr>
+                                        @php
+                                            $total_price += $item->selling_price;
+                                        @endphp
                                         @endforeach
+                                        <tr>
+                                            <td colspan="6">Sub Total</td>
+                                            <td>{{ $total_price }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">Discount</td>
+                                            <td>{{ $payment->discount_amount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">Paid Amount</td>
+                                            <td>{{ $payment->paid_amount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">Due Amount</td>
+                                            <td>{{ $payment->due_amount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">Grand Total</td>
+                                            <td>{{ $payment->total_amount }}</td>
+                                        </tr>
                                     </tbody>
 
                                 </table>
+
+                                <button type="submit" class="btn btn-info">Approve</button>
 
                             </form>
 
